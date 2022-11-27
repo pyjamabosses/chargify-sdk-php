@@ -189,7 +189,7 @@ class Chargify
         }
 
         if (!empty($rawData)) {
-            $options['body'] = Psr7\streamFor($rawData);
+            $options['body'] = Psr7\Utils::streamFor($rawData);
         }
 
         try {
