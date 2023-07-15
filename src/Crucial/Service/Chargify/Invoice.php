@@ -21,17 +21,29 @@ class Invoice extends AbstractEntity
 {
 
     /**
-     * (either 'amount' or 'amount_in_cents' is required) If you use this
-     * parameter, you should pass a dollar amount represented as a string. For
-     * example, $10.00 would be represented as 10.00.
+     * 
      *
-     * @param string $amount
+     * @param string $unitPrice
      *
      * @return Charge
      */
-    public function setAmount($amount)
+    public function setUnitPrice($unitPrice)
     {
-        $this->setParam('amount', $amount);
+        $this->setParam('unit_price', $unitPrice);
+
+        return $this;
+    }
+
+    /**
+     * 
+     *
+     * @param string $quantity
+     *
+     * @return Charge
+     */
+    public function setQuantity($quantity=1)
+    {
+        $this->setParam('quantity', $quantity);
 
         return $this;
     }
@@ -58,13 +70,13 @@ class Invoice extends AbstractEntity
      * (required) A helpful explanation for the charge. This amount will remind
      * you and your customer for the reason for the assessment of the charge.
      *
-     * @param string $memo
+     * @param string $title
      *
-     * @return Charge
+     * @return Invoice
      */
-    public function setMemo($memo)
+    public function setTitle($title)
     {
-        $this->setParam('memo', $memo);
+        $this->setParam('title', $title);
 
         return $this;
     }
@@ -86,7 +98,7 @@ class Invoice extends AbstractEntity
     public function create($subscriptionId)
     {
         $service       = $this->getService();
-        $rawData       = $this->getRawData(array('charge' => $this->getParams()));
+        $rawData       = $this->getRawData(array('invoice' => array('line_items' => $this->getParams())));
         $response      = $service->request('subscriptions/' . (int)$subscriptionId . '/invoices', 'POST', $rawData);
         $responseArray = $this->getResponseArray($response);
 
