@@ -98,7 +98,8 @@ class Invoice extends AbstractEntity
     public function create($subscriptionId)
     {
         $service       = $this->getService();
-        $rawData       = $this->getRawData(array('invoice' => array('line_items' => $this->getParams())));
+        // $rawData       = $this->getRawData(array('invoice' => array('line_items' => $this->getParams())));
+        $rawData       = $this->getRawData(array('invoice' =>  $this->getParams()));
         $response      = $service->request('subscriptions/' . (int)$subscriptionId . '/invoices', 'POST', $rawData);
         $responseArray = $this->getResponseArray($response);
 
