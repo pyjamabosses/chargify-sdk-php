@@ -17,26 +17,27 @@
 
 namespace Crucial\Service;
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
-use Crucial\Service\Chargify\Exception\BadMethodCallException;
-use Crucial\Service\Chargify\Adjustment;
-use Crucial\Service\Chargify\Charge;
-use Crucial\Service\Chargify\Component;
-use Crucial\Service\Chargify\Coupon;
-use Crucial\Service\Chargify\Customer;
 use Crucial\Service\Chargify\Event;
-use Crucial\Service\Chargify\Product;
-use Crucial\Service\Chargify\Refund;
-use Crucial\Service\Chargify\Statement;
 use Crucial\Service\Chargify\Stats;
-use Crucial\Service\Chargify\Subscription;
-use Crucial\Service\Chargify\Transaction;
+use Crucial\Service\Chargify\Charge;
+use Crucial\Service\Chargify\Coupon;
+use Crucial\Service\Chargify\Refund;
+use Crucial\Service\Chargify\Invoice;
+use Crucial\Service\Chargify\Product;
 use Crucial\Service\Chargify\Webhook;
+use Crucial\Service\Chargify\Customer;
+use Crucial\Service\Chargify\Component;
+use Crucial\Service\Chargify\Statement;
+use Crucial\Service\Chargify\Adjustment;
+use Crucial\Service\Chargify\Transaction;
+use Crucial\Service\Chargify\Subscription;
+use GuzzleHttp\Exception\RequestException;
+use Crucial\Service\Chargify\Exception\BadMethodCallException;
 
 class Chargify
 {
@@ -263,6 +264,16 @@ class Chargify
     public function charge()
     {
         return new Charge($this);
+    }
+
+    /**
+     * Helper for instantiating an instance of Invoice
+     *
+     * @return Invoice
+     */
+    public function invoice()
+    {
+        return new Invoice($this);
     }
 
     /**
