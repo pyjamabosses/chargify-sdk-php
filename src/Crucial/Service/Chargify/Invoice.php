@@ -82,6 +82,20 @@ class Invoice extends AbstractEntity
     }
 
     /**
+     * A custom memo can be sent with the memo parameter to override the site's default.
+     *
+     * @param string $memo
+     *
+     * @return Invoice
+     */
+    public function setMemo($memo)
+    {
+        $this->setParam('memo', $memo);
+
+        return $this;
+    }
+
+    /**
      * For "live" subscriptions (i.e. subscriptions that are not canceled or expired)
      * you have the ability to attach a one-time (or "one-off") charge of an
      * arbitrary amount.Enter description here...
@@ -98,7 +112,7 @@ class Invoice extends AbstractEntity
     public function create($subscriptionId)
     {
         $service       = $this->getService();
-        $rawData       = $this->getRawData(array('invoice' => array('line_items' => array($this->getParams()))));
+        $rawData       = $this->getRawData(array('invoice' => array('line_items' => array($this->getParams()), 'memo' => $this->getParam('memo'))));
         // $rawData       = $this->getRawData(array('invoice' =>  $this->getParams()));
         $response      = $service->request('subscriptions/' . (int)$subscriptionId . '/invoices', 'POST', $rawData);
         $responseArray = $this->getResponseArray($response);
