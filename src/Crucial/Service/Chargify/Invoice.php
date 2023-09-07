@@ -96,6 +96,20 @@ class Invoice extends AbstractEntity
     }
 
     /**
+     * Send custom payment instructions
+     *
+     * @param string $payment_instruction
+     *
+     * @return Invoice
+     */
+    public function setPaymentInstructions($paymentInstructions)
+    {
+        $this->setParam('payment_instructions', $paymentInstructions);
+
+        return $this;
+    }
+
+    /**
      * For "live" subscriptions (i.e. subscriptions that are not canceled or expired)
      * you have the ability to attach a one-time (or "one-off") charge of an
      * arbitrary amount.Enter description here...
@@ -112,7 +126,11 @@ class Invoice extends AbstractEntity
     public function create($subscriptionId)
     {
         $service       = $this->getService();
-        $rawData       = $this->getRawData(array('invoice' => array('line_items' => array($this->getParams()), 'memo' => $this->getParam('memo'))));
+        $rawData       = $this->getRawData(array(
+            'invoice' => array('line_items' => array($this->getParams()), 
+            'memo' => $this->getParam('memo'),
+            'payment_instructions' => $this->getParam('payment_instructions'),
+        )));
         // $rawData       = $this->getRawData(array('invoice' =>  $this->getParams()));
         $response      = $service->request('subscriptions/' . (int)$subscriptionId . '/invoices', 'POST', $rawData);
         $responseArray = $this->getResponseArray($response);
