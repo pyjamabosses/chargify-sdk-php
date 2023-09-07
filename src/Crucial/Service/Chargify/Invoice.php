@@ -127,10 +127,10 @@ class Invoice extends AbstractEntity
     {
         $service       = $this->getService();
         $rawData       = $this->getRawData(array(
-            'invoice' => array('line_items' => array($this->getParams()), 
+            'invoice' => array('line_items' => array($this->getParams())), 
             'memo' => $this->getParam('memo'),
-            'payment_instructions' => $this->getParam('payment_instructions'),
-        )));
+            'payment_instructions' => $this->getParam('payment_instructions')
+        ));
         // $rawData       = $this->getRawData(array('invoice' =>  $this->getParams()));
         $response      = $service->request('subscriptions/' . (int)$subscriptionId . '/invoices', 'POST', $rawData);
         $responseArray = $this->getResponseArray($response);
