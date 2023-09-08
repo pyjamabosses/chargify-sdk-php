@@ -38,6 +38,7 @@ use Crucial\Service\Chargify\Transaction;
 use Crucial\Service\Chargify\Subscription;
 use GuzzleHttp\Exception\RequestException;
 use Crucial\Service\Chargify\Exception\BadMethodCallException;
+use Crucial\Service\Chargify\Payment;
 
 class Chargify
 {
@@ -274,6 +275,16 @@ class Chargify
     public function invoice()
     {
         return new Invoice($this);
+    }
+
+    /**
+     * elper for instantiating an instance of Payment
+     *
+     * @return Payment
+     */
+    public function payment()
+    {
+        return new Payment($this);
     }
 
     /**

@@ -25,7 +25,7 @@ class Invoice extends AbstractEntity
      *
      * @param string $unitPrice
      *
-     * @return Charge
+     * @return Invoice
      */
     public function setUnitPrice($unitPrice)
     {
@@ -39,7 +39,7 @@ class Invoice extends AbstractEntity
      *
      * @param string $quantity
      *
-     * @return Charge
+     * @return Invoice
      */
     public function setQuantity($quantity=1)
     {
@@ -57,7 +57,7 @@ class Invoice extends AbstractEntity
      *
      * @param int $amountInCents
      *
-     * @return Charge
+     * @return Invoice
      */
     public function setAmountInCents($amountInCents)
     {
