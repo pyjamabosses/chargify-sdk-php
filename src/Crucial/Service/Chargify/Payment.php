@@ -32,6 +32,35 @@ class Payment extends AbstractEntity
         return $this;
     }
 
+
+    /**
+     * Set payment method name ex.g. 'check'
+     *
+     * @param string $paymentMethodName
+     *
+     * @return Payment
+     */
+    public function setPaymentMethodName($paymentMethodName)
+    {
+        $this->setParam('payment_method_name"', $paymentMethodName);
+
+        return $this;
+    }
+
+    /**
+     * Set payment method name ex.g. 'check'
+     *
+     * @param string $paymentMethodDetails
+     *
+     * @return Payment
+     */
+    public function setPaymentMethodDetails($paymentMethodDetails)
+    {
+        $this->setParam('payment_method_details"', $paymentMethodDetails);
+
+        return $this;
+    }
+
     /**
      * Create payment for subscritpion
      *
