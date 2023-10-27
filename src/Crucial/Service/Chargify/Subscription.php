@@ -138,6 +138,21 @@ class Subscription extends AbstractEntity
     }
 
     /**
+     * The ID of an existing payment profile for customer within Chargify. Optional, use only if creating
+     * subscription for existing customer and payment profile
+     *
+     * @param string|int $idFromChargify
+     *
+     * @return Subscription
+     */
+    public function setPaymentProfileId($idFromChargify)
+    {
+        $this->setParam('payment_profile_id', $idFromChargify);
+
+        return $this;
+    }
+
+    /**
      * Set payment profile attributes. Useful when accepting (or requiring) a
      * credit card at signup.
      *
