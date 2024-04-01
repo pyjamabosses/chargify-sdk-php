@@ -96,6 +96,20 @@ class Invoice extends AbstractEntity
     }
 
     /**
+     * A custom description can be sent with the description parameter to override the site's default.
+     *
+     * @param string $description
+     *
+     * @return Invoice
+     */
+    public function setDescription($description)
+    {
+        $this->setParam('description', $description);
+
+        return $this;
+    }
+
+    /**
      * Send custom payment instructions
      *
      * @param string $payment_instruction
